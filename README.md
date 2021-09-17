@@ -1,2 +1,2 @@
-# plugin-template
-A template for building Discord++ plugins
+# Plugin: Message Embed
+Discord++ plugin for message embeds
