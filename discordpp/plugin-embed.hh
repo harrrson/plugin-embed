@@ -46,7 +46,7 @@ namespace discordpp{
 
 			return *this;
 		};
-		#TODO: add timestamp
+		
 		PluginEmbed setTimestamp(std::string timestamp) {
             if (!timestamp.empty()) {
                 embed["timestamp"] = timestamp;
