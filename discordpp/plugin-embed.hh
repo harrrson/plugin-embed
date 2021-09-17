@@ -48,17 +48,17 @@ namespace discordpp{
 		};
 		
 		PluginEmbed setTimestamp(std::string timestamp) {
-            if (!timestamp.empty()) {
-                embed["timestamp"] = timestamp;
-            } else {
-                time_t now;
-                time(&now);
-                char buf[sizeof "2011-10-08T07:07:09Z"];
-                strftime(buf, sizeof buf, "%FT%TZ", gmtime(&now));
-                embed["timestamp"] = (std::string)buf;
-            }
+			if (!timestamp.empty()) {
+				embed["timestamp"] = timestamp;
+			} else {
+				time_t now;
+				time(&now);
+				char buf[sizeof "2011-10-08T07:07:09Z"];
+				strftime(buf, sizeof buf, "%FT%TZ", gmtime(&now));
+				embed["timestamp"] = (std::string)buf;
+			}
 
-            return *this;
+			return *this;
         };
 
 		PluginEmbed setColor(int color){
@@ -151,16 +151,16 @@ namespace discordpp{
 
 		PluginEmbed addField(std::string title, std::string desc ,bool _inline){
 			if (embed.find("fields") == embed.end()) embed["fields"] = nlohmann::json::array();
+			
+			nlohmann::json toPush;
 
-            nlohmann::json toPush;
+			toPush["name"] = title;
+			toPush["value"] = desc;
+			toPush["inline"] = _inline;
 
-            toPush["name"] = title;
-            toPush["value"] = desc;
-            toPush["inline"] = _inline;
+			embed["fields"].push_back(toPush);
 
-            embed["fields"].push_back(toPush);
-
-            return *this;
+			return *this;
 		}
 
 		nlohmann::json getEmbed(){
