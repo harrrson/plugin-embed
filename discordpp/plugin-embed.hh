@@ -7,8 +7,6 @@
 
 namespace discordpp{
 
-	using MessageEmbed = PluginEmbed::MessageEmbed;
-
 	template<class BASE>
 	class PluginEmbed: public BASE, virtual BotStruct{
 	public:
@@ -24,7 +22,7 @@ namespace discordpp{
 				MAROON=0x800000,
 				YELLOW=0xFFFF00,
 				OLIVE=0x808000,
-				LIME=0x00FF00
+				LIME=0x00FF00,
 				GREEN=0x008000,
 				AQUA=0x00FFFF,
 				TEAL=0x008080,
@@ -35,127 +33,127 @@ namespace discordpp{
 			};
 			
 			PluginEmbed setTitle(std::string title){
-				embed["title"]=title;
+				this.embed["title"]=title;
 
 				return *this;
 			};
 
 			PluginEmbed setDescription(std::string description){
-				embed["description"]=description;
+				this.embed["description"]=description;
 
 				return *this;
 			};
 
 			PluginEmbed setUrl(std::string url){
-				embed["url"]=url;
+				this.embed["url"]=url;
 
 				return *this;
 			};
 			
 			PluginEmbed setTimestamp(std::string timestamp) {
 				if (!timestamp.empty()) {
-					embed["timestamp"] = timestamp;
+					this.embed["timestamp"] = timestamp;
 				} else {
 					time_t now;
 					time(&now);
 					char buf[sizeof "2011-10-08T07:07:09Z"];
 					strftime(buf, sizeof buf, "%FT%TZ", gmtime(&now));
-					embed["timestamp"] = (std::string)buf;
+					this.embed["timestamp"] = (std::string)buf;
 				}
 
 				return *this;
 			};
 
 			PluginEmbed setColor(int color){
-				embed["url"]=color;
+				this.embed["url"]=color;
 
 				return *this;
 			};
 
 			PluginEmbed setFooterText(std::string footerText){
-				embed["footer"]["text"]=footerText;
+				this.embed["footer"]["text"]=footerText;
 
 				return *this;
 			};
 
 
 			PluginEmbed setFooterIconUrl(std::string footerIconUrl){
-				embed["footer"]["icon_url"]=footerIconUrl;
+				this.embed["footer"]["icon_url"]=footerIconUrl;
 
 				return *this;
 			};
 
 			PluginEmbed setImageUrl(std::string url){
-				embed["image"]["url"]=url;
+				this.embed["image"]["url"]=url;
 
 				return *this;
 			}
 
 			PluginEmbed setImageDimensions(int width, int height){
-				embed["image"]["width"]=width;
-				embed["image"]["height"]=height;
+				this.embed["image"]["width"]=width;
+				this.embed["image"]["height"]=height;
 
 				return *this;
 			}
 
 			PluginEmbed setThumbnailUrl(std::string url){
-				embed["thumbnail"]["url"]=url;
+				this.embed["thumbnail"]["url"]=url;
 
 				return *this;
 			}
 
 			PluginEmbed setThumbnailDimensions(int width, int height){
-				embed["thumbnail"]["width"]=width;
-				embed["thumbnail"]["height"]=height;
+				this.embed["thumbnail"]["width"]=width;
+				this.embed["thumbnail"]["height"]=height;
 
 				return *this;
 			}
 
 			PluginEmbed setVideoUrl(std::string url){
-				embed["video"]["url"]=url;
+				this.embed["video"]["url"]=url;
 
 				return *this;
 			}
 
 			PluginEmbed setVideoDimensions(int width, int height){
-				embed["video"]["width"]=width;
-				embed["video"]["height"]=height;
+				this.embed["video"]["width"]=width;
+				this.embed["video"]["height"]=height;
 
 				return *this;
 			}
 
 			PluginEmbed setProviderName(std::string name){
-				embed["provider"]["name"]=name;
+				this.embed["provider"]["name"]=name;
 
 				return *this;
 			}
 
 			PluginEmbed setProviderUrl(std::string url){
-				embed["provider"]["url"]=url;
+				this.embed["provider"]["url"]=url;
 
 				return *this;
 			}
 
 			PluginEmbed setAuthorName(std::string name){
-				embed["author"]["name"]=name;
+				this.embed["author"]["name"]=name;
 
 				return *this;
 			}
 
 			PluginEmbed setAuthorUrl(std::string url){
-				embed["author"]["url"]=url;
+				this.embed["author"]["url"]=url;
 
 				return *this;
 			}
 
 			PluginEmbed setAuthorImageUrl(std::string url){
-				embed["author"]["icon_url"]=url;
+				this.embed["author"]["icon_url"]=url;
 
 				return *this;
 			}
 
 			PluginEmbed addField(std::string title, std::string desc ,bool _inline){
-				if (embed.find("fields") == embed.end()) embed["fields"] = nlohmann::json::array();
+				if (this.embed.find("fields") == this.embed.end()) this.embed["fields"] = nlohmann::json::array();
 				
 				nlohmann::json toPush;
 
@@ -163,17 +161,17 @@ namespace discordpp{
 				toPush["value"] = desc;
 				toPush["inline"] = _inline;
 
-				embed["fields"].push_back(toPush);
+				this.embed["fields"].push_back(toPush);
 
 				return *this;
 			}
 
 			nlohmann::json getEmbed(){
-				return embed;
+				return this.embed;
 			};
 		protected:
-			nlohman::json embed;
-		}
+			nlohmann::json embed;
+		};
 	};
 	
 }
