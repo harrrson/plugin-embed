@@ -32,19 +32,25 @@ namespace discordpp{
 			PURPLE=0x800080
 		};
 		
-		void setTitle(std::string title){
+		MessageEmbed* setTitle(std::string title){
 			this->embed["title"]=title;
+
+			return this;
 		};
 
-		void setDescription(std::string description){
+		MessageEmbed* setDescription(std::string description){
 			this->embed["description"]=description;
+
+			return this;
 		};
 
-		void setUrl(std::string url){
+		MessageEmbed* setUrl(std::string url){
 			this->embed["url"]=url;
+
+			return this;
 		};
 		
-		void setTimestamp(std::string timestamp) {
+		MessageEmbed* setTimestamp(std::string timestamp) {
 			if (!timestamp.empty()) {
 				this->embed["timestamp"] = timestamp;
 			} else {
@@ -54,68 +60,98 @@ namespace discordpp{
 				strftime(buf, sizeof buf, "%FT%TZ", gmtime(&now));
 				this->embed["timestamp"] = (std::string)buf;
 			}
+
+			return this;
 		};
 
-		void setColor(int color){
+		MessageEmbed* setColor(int color){
 			this->embed["color"]=color;
+
+			return this;
 		};
 
-		void setFooterText(std::string footerText){
+		MessageEmbed* setFooterText(std::string footerText){
 			this->embed["footer"]["text"]=footerText;
+
+			return this;
 		};
 
-		void setFooterIconUrl(std::string footerIconUrl){
+		MessageEmbed* setFooterIconUrl(std::string footerIconUrl){
 			this->embed["footer"]["icon_url"]=footerIconUrl;
+
+			return this;
 		};
 		
-		void setImageUrl(std::string url){
+		MessageEmbed* setImageUrl(std::string url){
 			this->embed["image"]["url"]=url;
+
+			return this;
 		}
 		//TODO: Check why dimensions does not work
-		void setImageDimensions(int width, int height){
+		MessageEmbed* setImageDimensions(int width, int height){
 			this->embed["image"]["width"]=width;
 			this->embed["image"]["height"]=height;
+
+			return this;
 		}
 
-		void setThumbnailUrl(std::string url){
+		MessageEmbed* setThumbnailUrl(std::string url){
 			this->embed["thumbnail"]["url"]=url;
+
+			return this;
 		}
 		//TODO: Check why dimensions does not work
-		void setThumbnailDimensions(int width, int height){
+		MessageEmbed* setThumbnailDimensions(int width, int height){
 			this->embed["thumbnail"]["width"]=width;
 			this->embed["thumbnail"]["height"]=height;
+
+			return this;
 		}
 
-		void setVideoUrl(std::string url){
+		MessageEmbed* setVideoUrl(std::string url){
 			this->embed["video"]["url"]=url;
+
+			return this;
 		}
 		//TODO: Check why video does not work
-		void setVideoDimensions(int width, int height){
+		MessageEmbed* setVideoDimensions(int width, int height){
 			this->embed["video"]["width"]=width;
 			this->embed["video"]["height"]=height;
+
+			return this;
 		}
 		//TODO: Check why provider name and url does not show
-		void setProviderName(std::string name){
+		MessageEmbed* setProviderName(std::string name){
 			this->embed["provider"]["name"]=name;
+
+			return this;
 		}
 
-		void setProviderUrl(std::string url){
+		MessageEmbed* setProviderUrl(std::string url){
 			this->embed["provider"]["url"]=url;
+
+			return this;
 		}
 		
-		void setAuthorName(std::string name){
+		MessageEmbed* setAuthorName(std::string name){
 			this->embed["author"]["name"]=name;
+
+			return this;
 		}
 
-		void setAuthorUrl(std::string url){
+		MessageEmbed* setAuthorUrl(std::string url){
 			this->embed["author"]["url"]=url;
+
+			return this;
 		}
 
-		void setAuthorIconUrl(std::string url){
+		MessageEmbed* setAuthorIconUrl(std::string url){
 			this->embed["author"]["icon_url"]=url;
+
+			return this;
 		}
 
-		void addField(std::string title, std::string desc ,bool _inline){
+		MessageEmbed* addField(std::string title, std::string desc ,bool _inline){
 			if (this->embed.find("fields") == this->embed.end()) this->embed["fields"] = nlohmann::json::array();
 			
 			nlohmann::json toPush;
@@ -125,6 +161,8 @@ namespace discordpp{
 			toPush["inline"] = _inline;
 
 			this->embed["fields"].push_back(toPush);
+
+			return this;
 		}
 
 		nlohmann::json getEmbed(){
